@@ -1,13 +1,15 @@
 # Tile Cache
 
-This is a tile caching software written in PHP to quickly setup your own indermediary cache for OpenStreetMap tiles.
+> This is a modernized and stripped-down version of https://github.com/cyclestreets/tilecache that also adds a seperate cron script and a small admin interface. All files thta are based on the original code are marked (tile.php, clean.inc.php).
+
+This is a tile caching software written in PHP to quickly setup your own intermediary cache for OpenStreetMap tiles.
 In our production use case, we cache the tiles for a long time. Caching for shorter times (e.g. a couple of days instead of >1 month)
 my lead to worse performance.
 
 Only the tile retrieval is handled by PHP, subsequent requests are served by the HTTP server.
 
 ## Requirements
-1. PHP 7+
+1. PHP 7+ with cURL library
 2. Apache HTTP Server, although using nginx should be working fine if you adapt the config file.
 3. Enough storage for the tiles (multiple GB)
 

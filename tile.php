@@ -1,5 +1,7 @@
 <?php
 
+// this file is based on: https://github.com/cyclestreets/tilecache/blob/master/index.php.
+
 if ( ! file_exists( 'config.php' ) ) {
     die( 'No config file' );
 }
