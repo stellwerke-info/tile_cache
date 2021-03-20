@@ -19,3 +19,14 @@ const TILECACHE_LAYERS = [
 	'osm'   => 'https://{s}.tile.openstreetmap.org',
 	'orm'   => 'https://{s}.tiles.openrailwaymap.org/standard',
 ];
+
+// Some config options for the public index site.
+const INDEX_DESCRIPTION = 'A short public description';
+
+const INDEX_LINKS = [
+	'https://example.invalid' => 'An example link',
+];
+
+const INDEX_META_LINKS = [
+	'https://example.invalid' => 'An example meta link',
+];
