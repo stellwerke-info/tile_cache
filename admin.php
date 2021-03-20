@@ -2,6 +2,10 @@
 
 session_start();
 
+if ( ! file_exists( 'config.php' ) ) {
+    die( 'No config file' );
+}
+
 require_once( 'config.php' );
 
 if ( ! defined( 'TILECACHE_ADMIN_PASSWORD' ) || empty( TILECACHE_ADMIN_PASSWORD ) ) {

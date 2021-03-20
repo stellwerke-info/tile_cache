@@ -1,5 +1,9 @@
 <?php
 
+if ( ! file_exists( 'config.php' ) ) {
+    die( 'No config file' );
+}
+
 require_once( 'config.php' );
 require_once( 'clean.inc.php' );
 
