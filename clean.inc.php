@@ -11,7 +11,7 @@ function clean_tiles( int $expiryDays ) {
 	echo 'Completed tile clearance: ' . $lastLine . PHP_EOL;
 
 	// Remove all empty folders
-	$command = 'find . -type d -empty -exec rmdir {} \;';
+	$command = 'find . -type d -empty -exec rmdir {} \; -prune';
 	echo 'Starting empty folder clearance: ' . $command . PHP_EOL;
 
 	// Run

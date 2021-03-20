@@ -1,5 +1,7 @@
 <?php
 
+chdir( __DIR__ );
+
 if ( ! file_exists( 'config.php' ) ) {
     die( 'No config file' );
 }
@@ -17,7 +19,6 @@ if ( php_sapi_name() !== 'cli' ) {
     }
 }
 
-chdir( __DIR__ );
 if (  getcwd() !== __DIR__ ) {
     die( 'Could not change into tile cache root directory...' );
 }
