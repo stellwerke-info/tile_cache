@@ -15,7 +15,7 @@ if ( ! defined( 'TILECACHE_ADMIN_PASSWORD' ) || empty( TILECACHE_ADMIN_PASSWORD 
 if ( isset( $_POST['pw'] ) && $_POST['pw'] == TILECACHE_ADMIN_PASSWORD ) {
     session_regenerate_id();
     $_SESSION['is_logged_in'] = true;
-    header( 'Location: admin.php');
+    header( 'Location: admin.php' );
     die();
 }
 

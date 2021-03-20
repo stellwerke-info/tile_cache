@@ -13,16 +13,8 @@ html, body {
      */
     background: #2C2D27 url(img/bg.jpg) no-repeat center center fixed;
     background-size: cover;
-    background-position: right;    
+    background-position: right;
 }
-
-/*@media (max-height: 1100px) {
-	html, body {
-		background: #2C2D27 url(img/bg-mobile.jpg) no-repeat center center fixed;
-        background-size: cover;
-        background-position: right;
-	}
-}*/
 
 #container {
     display: table-cell;
@@ -85,54 +77,6 @@ a.button:hover {
     background-color: black;
 }
 
-#social {
-    margin-bottom: 0;
-}
-
-.socialicon {
-    height: 2em;
-	margin: 5px;
-}
-
-#social a {
-    transition: opacity 250ms linear;
-	border-bottom: none;
-}
-
-#social a:hover {
-	border:0;
-	opacity: 0.4;
-}
-
 .meta {
     font-size: 70%;
-}
-
-#show {
-	position:absolute;
-	top: 0px;
-	left: 0px;
-	padding: 5px;
-	background-color:#222;
-    transition: background-color 250ms linear;
-	opacity: 0.9;
-	z-index: 100;
-	border-bottom: none;
-}
-#show:hover {
-	border-bottom: none;
-	background-color: black;
-}
-
-#desc {
-	position:absolute;
-	bottom: 0px;
-	right: 0px;
-	padding: 5px;
-	background-color:#222;	
-	opacity: 0.9;
-}
-
-video {
-    margin: 0 auto;
 }
