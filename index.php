@@ -5,6 +5,11 @@ if ( ! file_exists( 'config.php' ) ) {
 }
 
 require_once( 'config.php' );
+
+if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false ) {
+	die( 'No user agent or referer specified! This is needed to successfully run your tile cache!' );
+}
+
 ?>
 <!doctype html>
 <html>

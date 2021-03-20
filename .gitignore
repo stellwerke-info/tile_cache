@@ -1,5 +1,6 @@
 # Ignore config file that might contain sensitive information.
 config.php
+.htaccess
 # Ignore all folders that might contain tiles
 */
 !img/

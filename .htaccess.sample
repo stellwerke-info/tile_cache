@@ -1,8 +1,9 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?stellwerke\.info/ [NC]
-RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?manuelhu\.de/ [NC]
+# Add your own domains to the referrer whitelist.
+RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?example\.invalid/ [NC]
+# END
 RewriteCond %{HTTP_REFERER} !^$ [NC]
 RewriteRule .*\.png$ - [F]
 

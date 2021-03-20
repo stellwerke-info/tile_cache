@@ -1,6 +1,14 @@
 <?php
 
+if ( ! file_exists( 'config.php' ) ) {
+    die( 'No config file' );
+}
+
 require_once( 'config.php' );
+
+if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false ) {
+	die( 'No user agent or referer specified! This is needed to successfully run your tile cache!' );
+}
 
 // Ensure the layer is supported
 if ( ! isset( $_GET['layer'] ) || ! isset( TILECACHE_LAYERS[ $_GET['layer'] ] ) ) {

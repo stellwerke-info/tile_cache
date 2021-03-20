@@ -14,7 +14,8 @@ const TILECACHE_BRANDING = 'Test TileCache';
 const TILECACHE_USER_AGENT = 'Test tilecache / Contact: info@example.invalid';
 const TILECACHE_REFERER = 'https://example.invalid/';
 
-// All defined updatresm tilesets.
+// All defined upstresm tilesets.
+// Only keys consisting of letters should be used!
 const TILECACHE_LAYERS = [
 	'osm'   => 'https://{s}.tile.openstreetmap.org',
 	'orm'   => 'https://{s}.tiles.openrailwaymap.org/standard',
