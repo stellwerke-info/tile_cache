@@ -1,0 +1,5 @@
+# Ignore config file that might contain sensitive information.
+config.php
+# Ignore all folders that might contain tiles
+*/
+!img/

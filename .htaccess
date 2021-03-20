@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?stellwerke\.info/ [NC]
+RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?manuelhu\.de/ [NC]
+RewriteCond %{HTTP_REFERER} !^$ [NC]
+RewriteRule .*\.png$ - [F]
+
+#RewriteCond %{REQUEST_URI} ^/index.php$
+#RewriteRule ^.*$ - [R=404,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} /([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
+RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA]
+
+#RewriteRule ^/([-a-z0-9]+)/([0-9]+)/([0-9]+)/(-?[0-9]+)@([.0-9]+)x.png$ /tile.php?action=tile&layer=$1&x=$3&y=$4&z=$2&scale=$5 [L,QSA]
+#RewriteRule ^/([-a-z0-9]+)/([-/a-z0-9]+)/([0-9]+)/([0-9]+)/(-?[0-9]+).png$ /tile.php?action=tile&layer=$1&variant=$2&x=$4&y=$5&z=$3 [L,QSA]
+#RewriteRule ^/([-a-z0-9]+)/([-/a-z0-9]+)/([0-9]+)/([0-9]+)/(-?[0-9]+)@([.0-9]+)x.png$ /tile.php?action=tile&layer=$1&variant=$2&x=$4&y=$5&z=$3&scale=$6 [L,QSA]
+
+ExpiresActive On
+ExpiresByType image/png "access plus 14 day"
+
