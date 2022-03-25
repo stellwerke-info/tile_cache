@@ -4,3 +4,4 @@ config.php
 # Ignore all folders that might contain tiles
 */
 !img/
+img/bg.jpg

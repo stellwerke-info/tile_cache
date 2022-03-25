@@ -13,7 +13,7 @@ if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILE
 }
 
 // Ensure the layer is supported
-if ( ! isset( $_GET['layer'] ) || ! isset( TILECACHE_LAYERS[ $_GET['layer'] ] ) ) {
+if ( ! isset( $_GET['layer'] ) || ! is_string( $_GET['layer'] ) || ! isset( TILECACHE_LAYERS[ $_GET['layer'] ] ) ) {
 	return false;
 }
 $layer = $_GET['layer'];
@@ -81,7 +81,7 @@ function getTileWithRetries( array $layers, string $layer, string $location ) {
 		}
 	}
 
-	return false; 
+	return false;
 }
 
 // Cahe a tile on disk.
