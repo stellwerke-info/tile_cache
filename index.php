@@ -24,12 +24,14 @@ if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILE
             <h1><?php echo htmlspecialchars( TILECACHE_BRANDING, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 ); ?></h1>
             <p><?php echo INDEX_DESCRIPTION; ?></p>
             <ul id="links">
-                <?php foreach( INDEX_LINKS as $link => $display ) {
+                <?php
+                $index_links = defined( 'INDEX_LINKS' ) && is_array( INDEX_LINKS ) ? INDEX_LINKS : [];
+                foreach( $index_links as $link => $display ) {
                     echo '<a class="button" href="' . htmlspecialchars( $link, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 ) . '">' . htmlspecialchars( $display, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 ) . '</a>';
                 } ?>
             </ul>
             <p>
-                <?php $meta_links = array_merge( INDEX_META_LINKS, [ 'admin.php' => 'Admin' ] );
+                <?php $meta_links = defined( 'INDEX_META_LINKS' ) && is_array( INDEX_META_LINKS ) ? INDEX_META_LINKS : [];
 
                 $meta_links = array_map( fn( $l ) => '<a class="meta" href="' . htmlspecialchars( $l, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 ) . '">' . htmlspecialchars( $meta_links[ $l ], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 ) . '</a>', array_keys( $meta_links ) );
                 echo implode( ' | ', $meta_links );

@@ -1,7 +1,5 @@
 <?php
 
-// Password used to access the administration script.
-const TILECACHE_ADMIN_PASSWORD = '';
 // Access token for HTTP request to the cron script (cron.php?token=XXXXX...).
 // Set to an empty string to disallow HTTP access (only allow CLI access).
 const TILECACHE_CRON_TOKEN = '';
