@@ -1,12 +1,20 @@
 RewriteEngine On
 RewriteBase /
 
+# OPTION 1 REFFERER WHITELIST
 # Add your own domains to the referrer whitelist.
 RewriteCond %{HTTP_REFERER} !^https://([a-z0-9A-Z_-]*\.)?example\.invalid/ [NC]
 # END
 RewriteCond %{HTTP_REFERER} !^$ [NC]
 RewriteRule .*\.png$ - [F]
 
+# OPTION 2 FETCH METADATA
+RewriteCond %{HTTP_SEC_FETCH_SITE} !^(|same-site|same-origin)$ [NC]
+RewriteCond %{HTTP_SEC_FETCH_MODE} !^(|no-cors)$ [NC]
+RewriteCond %{HTTP_SEC_FETCH_DEST} !^(|image)$ [NC]
+RewriteRule .*\.png$ - [F]
+
+# Download non-cached tiles
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} /([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
 RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA]

@@ -8,6 +8,8 @@ if ( ! file_exists( 'config.php' ) ) {
 
 require_once( 'config.php' );
 
+ini_set( 'display_errors', 'off' );
+
 if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false ) {
 	die( 'No user agent or referer specified! This is needed to successfully run your tile cache!' );
 }
