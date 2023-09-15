@@ -17,7 +17,14 @@ RewriteRule .*\.png$ - [F]
 # Download non-cached tiles
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} /([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
-RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA]
+RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA,E=TILE_DOWNLOAD:1]
+
+RewriteCond %{ENV:REDIRECT_TILE_DOWNLOAD} ^$
+RewriteRule ^tile.php - [F,L]
+
+# Block access to important files
+RewriteRule ^config.php - [F,L]
+RewriteRule ^cron.php - [F,L]
 
 # Enable browser caching. See also TILECACHE_BROWSER_CACHE_DAYS in config.php which has to be in sync!
 ExpiresActive On
