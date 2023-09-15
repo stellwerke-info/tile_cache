@@ -19,5 +19,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} /([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
 RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA]
 
+# Enable browser caching. See also TILECACHE_BROWSER_CACHE_DAYS in config.php which has to be in sync!
 ExpiresActive On
 ExpiresByType image/png "access plus 14 day"

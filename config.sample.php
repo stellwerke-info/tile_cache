@@ -7,7 +7,7 @@ const TILECACHE_CRON_TOKEN = '';
 const TILECACHE_CLEAN_DAYS = 35;
 const TILECACHE_BROWSER_CACHE_DAYS = 14; // This also needs to be changed in the .htaccess file.
 
-// Branding that is shown to the user and User Agent/Referer sent to the upstresm tile servers.
+// Branding that is shown to the user and User Agent/Referer sent to the upstream tile servers.
 const TILECACHE_BRANDING = 'Test TileCache';
 const TILECACHE_USER_AGENT = 'Test tilecache / Contact: info@example.invalid';
 const TILECACHE_REFERER = 'https://example.invalid/';

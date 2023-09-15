@@ -19,7 +19,7 @@ if ( php_sapi_name() !== 'cli' ) {
     }
 }
 
-if (  getcwd() !== __DIR__ ) {
+if ( getcwd() !== __DIR__ ) {
     die( 'Could not change into tile cache root directory...' );
 }
 

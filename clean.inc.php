@@ -2,7 +2,7 @@
 
 // this file is based on: https://github.com/cyclestreets/tilecache/blob/master/index.php.
 
-function clean_tiles( int $expiryDays ) {
+function clean_tiles( int $expiryDays ) : void {
 	// Command to clear out the tiles from subfolders
 	$command = 'find . -mindepth 2 -type f -name \'*.png\' -mtime +' . $expiryDays . ' -exec rm -f {} \;';
 

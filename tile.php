@@ -16,15 +16,17 @@ if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILE
 
 // Ensure the layer is supported
 if ( ! isset( $_GET['layer'] ) || ! is_string( $_GET['layer'] ) || ! isset( TILECACHE_LAYERS[ $_GET['layer'] ] ) ) {
-	return false;
+	http_response_code( 400 );
+	die();
 }
 $layer = $_GET['layer'];
 
 // Ensure the x/y/z parameters are present and numeric
 $parameters = [ 'x', 'y', 'z' ];
 foreach ( $parameters as $parameter ) {
-	if ( ! isset( $_GET[$parameter] ) || ! ctype_digit( $_GET[ $parameter ] ) ) {
-		return false;
+	if ( ! isset( $_GET[ $parameter ] ) || ! is_string( $_GET[ $parameter ] ) || ! ctype_digit( $_GET[ $parameter ] ) ) {
+		http_response_code( 400 );
+		die();
 	}
 	${$parameter} = $_GET[ $parameter ];
 }
@@ -43,7 +45,7 @@ function getTileserverUrl( array $layers, string $layer ) {
 }
 
 // Retreive a tile from a remote server.
-function getTile( array $layers, string $layer, string $location ) {
+function getTile( array $layers, string $layer, string $location ) : string|false {
     $headers = [
 		'User-Agent: ' . TILECACHE_USER_AGENT,
 		'Referer: ' . TILECACHE_REFERER,
@@ -76,7 +78,7 @@ function getTile( array $layers, string $layer, string $location ) {
 }
 
 // Try to donload the tile two times.
-function getTileWithRetries( array $layers, string $layer, string $location ) {
+function getTileWithRetries( array $layers, string $layer, string $location ) : string|false {
 	for ( $i = 0; $i < 2; $i++ ) {
 		if ( $binary = getTile( $layers, $layer, $location ) ) {
 			return $binary;
@@ -87,7 +89,7 @@ function getTileWithRetries( array $layers, string $layer, string $location ) {
 }
 
 // Cahe a tile on disk.
-function cacheTile( $binary, string $layer, string $path, string $location ) : bool {
+function cacheTile( string $binary, string $layer, string $path, string $location ) : bool {
 	// Ensure the cache is writable
 	$cache = __DIR__ . '/';
 	if ( ! is_writable( $cache ) ) {
@@ -119,11 +121,13 @@ $binary = getTileWithRetries( TILECACHE_LAYERS, $layer, $location );
 
 // If no tile was retrieved, serve the null tile and end at this point
 if ( ! $binary ) {
-	$binary = file_get_contents( './nulltile.png' );
+	http_response_code( 404 );
+	die();
 } else {
 	// Cache tile on disk.
 	if ( ! cacheTile( $binary, $layer, $path, $location ) ) {
-		return false;
+		http_response_code( 500 );
+		die();
 	}
 
 	// Send cache headers; see https://developers.google.com/speed/docs/best-practices/caching
