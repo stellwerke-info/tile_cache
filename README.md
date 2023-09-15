@@ -9,7 +9,7 @@ my lead to worse performance.
 Only the tile retrieval is handled by PHP, subsequent requests are served directly by the HTTP server.
 
 ## Requirements
-1. PHP 8+ with cURL library
+1. PHP 8.2+ with cURL library
 2. Apache HTTP Server, although using nginx should be working fine if you adapt the config file.
 3. Enough storage for the tiles (depending on the cache duration in the order of multiple GB)
 

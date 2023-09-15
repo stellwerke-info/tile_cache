@@ -10,9 +10,10 @@ const TILECACHE_REFERER = 'https://example.invalid/';
 
 // All defined upstream tilesets.
 // Only keys consisting of letters should be used!
+// the value is an array consisting of a template string, and the max zoom level.
 const TILECACHE_LAYERS = [
-	'osm'   => 'https://{s}.tile.openstreetmap.org',
-	'orm'   => 'https://{s}.tiles.openrailwaymap.org/standard',
+	'osm'   => [ 'https://{s}.tile.openstreetmap.org', 17 ],
+	'orm'   => [ 'https://{s}.tiles.openrailwaymap.org/standard', 17 ],
 ];
 
 // Some config options for the public index site.
