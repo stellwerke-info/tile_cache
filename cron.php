@@ -3,24 +3,36 @@
 chdir( __DIR__ );
 
 if ( ! file_exists( 'config.php' ) ) {
-    die( 'No config file' );
+	die( 'No config file' );
 }
 
 require_once( 'config.php' );
-require_once( 'clean.inc.php' );
 
 if ( php_sapi_name() !== 'cli' ) {
-    if ( ! defined( 'TILECACHE_CRON_TOKEN' ) || empty( TILECACHE_CRON_TOKEN ) || ! is_string( TILECACHE_CRON_TOKEN ) ) {
-        die( 'Kein Zugangstoken definiert!' );
-    }
-
-    if ( ! isset( $_GET['token'] ) || ! is_string( $_GET['token'] ) || $_GET['token'] !== TILECACHE_CRON_TOKEN ) {
-        die( 'Kein Token angegeben oder Token falsch!' );
-    }
+	http_response_code( 403 );
+	die();
 }
 
 if ( getcwd() !== __DIR__ ) {
-    die( 'Could not change into tile cache root directory...' );
+	die( 'Could not change into tile cache root directory...' );
+}
+
+// this function is based on: https://github.com/cyclestreets/tilecache/blob/master/index.php.
+function clean_tiles( int $expiryDays ) : void {
+	// Command to clear out the tiles from subfolders
+	$command = 'find . -mindepth 2 -type f -name \'*.png\' -mtime +' . $expiryDays . ' -exec rm -f {} \;';
+
+	echo 'Starting tile clearance: ' . $command . PHP_EOL;
+	$lastLine = exec ($command);
+	echo 'Completed tile clearance: ' . $lastLine . PHP_EOL;
+
+	// Remove all empty folders
+	$command = 'find . -type d -empty -exec rmdir {} \; -prune';
+	echo 'Starting empty folder clearance: ' . $command . PHP_EOL;
+
+	// Run
+	$lastLine = exec ($command);
+	echo 'Completed empty folder clearance: ' . $lastLine . PHP_EOL;
 }
 
 clean_tiles( TILECACHE_CLEAN_DAYS ?? 35 );

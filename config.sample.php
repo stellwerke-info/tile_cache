@@ -1,9 +1,5 @@
 <?php
 
-// Access token for HTTP request to the cron script (cron.php?token=XXXXX...).
-// Set to an empty string to disallow HTTP access (only allow CLI access).
-const TILECACHE_CRON_TOKEN = '';
-
 const TILECACHE_CLEAN_DAYS = 35;
 const TILECACHE_BROWSER_CACHE_DAYS = 14; // This also needs to be changed in the .htaccess file.
 

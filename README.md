@@ -1,6 +1,6 @@
 # Tile Cache
 
-> This is a modernized and stripped-down version of https://github.com/cyclestreets/tilecache that also adds a seperate cron script. All files that are based on the original code are marked (tile.php, clean.inc.php).
+> This is a modernized and stripped-down version of https://github.com/cyclestreets/tilecache that also adds a seperate cron script. All files that are based on the original code are marked (`tile.php`, `cron.php`).
 
 This is a tile caching software written in PHP to quickly setup your own intermediary cache for OpenStreetMap tiles.
 In our production use case, we cache the tiles for a long time. Caching for shorter times (e.g. a couple of days instead of >1 month)
@@ -21,7 +21,7 @@ Only the tile retrieval is handled by PHP, subsequent requests are served direct
     - Both methods can be enabled at the same time.
 3. Put an image file into `img/bg.pg` that will be shown in the background on the public landing page and the admin page.
 3. Upload all files
-4. Add a cron job to `cron.php` (preferably run with PHP-CLI, alternatively you cann specify a (random) `TILECACHE_CRON_TOKEN` in `config.php` and setup a HTTP cron with your token as GET param `?token=...`).
+4. Add a cron job to `cron.php` (via with PHP-CLI. HTTP Crons will not work well because the runtime might get rather long)
 
 ## Administration
 Cleanup happens automatically via cron.
