@@ -45,7 +45,6 @@ $loc = new Loc( $l['x'], $l['y'], $l['z'] );
 function getTileserverUrl( array $layers, string $layer ) : array {
 	[ $tileserver, $maxz ] = $layers[ $layer ];
 	$serverLetter = chr( 97 + rand( 0, 2 ) );	// i.e. a, b, or c
-	$tileserver = str_replace( '(a|b|c)', $serverLetter, $tileserver );
 	$tileserver = str_replace( '{s}', $serverLetter, $tileserver );
 	return [ $tileserver, $maxz ];
 }
@@ -65,7 +64,7 @@ function getTile( array $layers, string $layer, Loc $loc ) : string|false {
 	}
 
 	// If the tileserver URL has explicit x,y,z parameter placeholders, use that instead of the standard /{z}/{x}/{y}.png layout
-	if ( substr_count( $tileserver, '{x}' ) && ( substr_count( $tileserver, '{y}' ) || substr_count( $tileserver, '{-y}' ) ) && substr_count( $tileserver, '{z}' ) ) {
+	if ( str_contains( $tileserver, '{x}' ) && ( str_contains( $tileserver, '{y}' ) || str_contains( $tileserver, '{-y}' ) ) && str_contains( $tileserver, '{z}' ) ) {
 		$url = str_replace( [ '{x}', '{y}', '{-y}', '{z}' ],  [ $loc->x, $loc->y, $loc->y, $loc->z ], $tileserver );
 	} else {
 		$url = $tileserver . $loc->location();

@@ -9,8 +9,10 @@ const TILECACHE_USER_AGENT = 'Test tilecache / Contact: info@example.invalid';
 const TILECACHE_REFERER = 'https://example.invalid/';
 
 // All defined upstream tilesets.
-// Only keys consisting of letters should be used!
-// the value is an array consisting of a template string, and the max zoom level.
+// - Only keys consisting of letters can be used!
+// - The value is an array consisting of a template string, and the max zoom level.
+// - The template string supports the parameters {s} and {x},{y},{z}. If the URL does not contain
+//   the three coordinate placeholders, a default of `/{z}/{x}/{y}.png` will be appended.
 const TILECACHE_LAYERS = [
 	'osm'   => [ 'https://{s}.tile.openstreetmap.org', 17 ],
 	'orm'   => [ 'https://{s}.tiles.openrailwaymap.org/standard', 17 ],
