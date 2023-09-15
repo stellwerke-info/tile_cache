@@ -17,9 +17,9 @@ Only the tile retrieval is handled by PHP, subsequent requests are served direct
 1. Adjust config parameters in `config.php` (rename from `config.sample.php`). Add all layers you want to cache and specifiy all needed information about your site (e.g. User agent and Referrer that will be sent to the upstream tile provider. *Note: Those settings are mandatory as many upstreams require contact information for mass downloading of tiles.*)
 2. Adjust access policy. This can be created from a mixture of two components
     - Adjust allowed refererrers in `.htaccess` (rename from `.htaccess.sample`). Some browsers do not send the Referer header, so an empty value should pass all checks. But any embedding web page can specify not to send the referer header, thus this check is not 100% reliable and can be circumvented rather easily.
-    - Fetch metadata checks [are supported by many moderen browsers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site#browser_compatibility) and cannot be spoofed by pages trying to embed tiles from the tile cache.
+    - Fetch metadata checks [are supported by many modern browsers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site#browser_compatibility) and cannot be spoofed by pages trying to embed tiles from the tile cache.
     - Both methods can be enabled at the same time.
-3. Put an image file into `img/bg.pg` that will be shown in the background on the public landing page and the admin page.
+3. Put an image file into `img/bg.pg` that will be shown in the background on the public landing page.
 3. Upload all files
 4. Add a cron job to `cron.php` (via with PHP-CLI. HTTP Crons will not work well because the runtime might get rather long)
 

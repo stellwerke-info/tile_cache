@@ -3,7 +3,7 @@
 // this file is based on: https://github.com/cyclestreets/tilecache/blob/master/index.php.
 
 if ( ! file_exists( 'config.php' ) ) {
-    die( 'No config file' );
+	die( 'No config file' );
 }
 
 require_once( 'config.php' );
@@ -36,7 +36,7 @@ $path = '/' . $z . '/' . $x . '/';
 $location = $path . $y . '.png';
 
 // Get the tileserver URL for a specified layer
-function getTileserverUrl( array $layers, string $layer ) {
+function getTileserverUrl( array $layers, string $layer ) : string {
 	$tileserver = $layers[ $layer ];
 	$serverLetter = chr( 97 + rand( 0, 2 ) );	// i.e. a, b, or c
 	$tileserver = str_replace( '(a|b|c)', $serverLetter, $tileserver );
@@ -46,7 +46,7 @@ function getTileserverUrl( array $layers, string $layer ) {
 
 // Retreive a tile from a remote server.
 function getTile( array $layers, string $layer, string $location ) : string|false {
-    $headers = [
+	$headers = [
 		'User-Agent: ' . TILECACHE_USER_AGENT,
 		'Referer: ' . TILECACHE_REFERER,
 	];
@@ -57,17 +57,22 @@ function getTile( array $layers, string $layer, string $location ) : string|fals
 	if ( substr_count( $tileserver, '{x}' ) && ( substr_count( $tileserver, '{y}' ) || substr_count( $tileserver, '{-y}' ) ) && substr_count( $tileserver, '{z}' ) ) {
 		preg_match( '|^/(.+)/(.+)/(.+)\.png$|', $location, $matches );
 		[ $_, $z, $x, $y ] = $matches;
-		$url = str_replace ( [ '{x}', '{y}', '{-y}', '{z}' ],  [ $x, $y, $y, $z ], $tileserver );
+		$url = str_replace( [ '{x}', '{y}', '{-y}', '{z}' ],  [ $x, $y, $y, $z ], $tileserver );
 	} else {
 		$url = $tileserver . $location;
 	}
 
-    $ch = curl_init( $url );
-    curl_setopt( $ch, CURLOPT_HEADER, 0 );
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers );
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-    curl_setopt( $ch, CURLOPT_FAILONERROR, true );
-    $binary = curl_exec( $ch );
+	$ch = \curl_init( $url );
+	\curl_setopt( $ch, \CURLOPT_HEADER, false );
+	\curl_setopt( $ch, \CURLOPT_HTTPHEADER, $headers );
+	\curl_setopt( $ch, \CURLOPT_RETURNTRANSFER, true );
+	\curl_setopt( $ch, \CURLOPT_FAILONERROR, true );
+	\curl_setopt( $ch, \CURLOPT_DISALLOW_USERNAME_IN_URL, true );
+	\curl_setopt( $ch, \CURLOPT_PROTOCOLS, \CURLPROTO_HTTPS );
+	\curl_setopt( $ch, \CURLOPT_FORBID_REUSE, true );
+	\curl_setopt( $ch, \CURLOPT_FRESH_CONNECT, true );
+	\curl_setopt( $ch, \CURLOPT_SSL_VERIFYPEER, true );
+	$binary = \curl_exec( $ch );
 
 	// Get the tile
 	if ( $binary === false ) {
