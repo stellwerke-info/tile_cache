@@ -1,6 +1,7 @@
 <?php
 
-const TILECACHE_CLEAN_DAYS = 35;
+const TILECACHE_CLEAN_DAYS = 16;
+const TILECACHE_CLEAN_DAYS_HIGH_RES = 12;
 const TILECACHE_BROWSER_CACHE_DAYS = 14; // This also needs to be changed in the .htaccess file.
 
 // Branding that is shown to the user and User Agent/Referer sent to the upstream tile servers.
