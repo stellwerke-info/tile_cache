@@ -1,3 +1,5 @@
+Header always setifempty Cross-Origin-Resource-Policy "same-site"
+
 RewriteEngine On
 RewriteBase /
 
