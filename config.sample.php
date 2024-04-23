@@ -15,7 +15,7 @@ const TILECACHE_REFERER = 'https://example.invalid/';
 // - The template string supports the parameters {s} and {x},{y},{z}. If the URL does not contain
 //   the three coordinate placeholders, a default of `/{z}/{x}/{y}.png` will be appended.
 const TILECACHE_LAYERS = [
-	'osm'   => [ 'https://{s}.tile.openstreetmap.org', 17 ],
+	'osm'   => [ 'https://tile.openstreetmap.org', 17 ],
 	'orm'   => [ 'https://{s}.tiles.openrailwaymap.org/standard', 17 ],
 ];
 
