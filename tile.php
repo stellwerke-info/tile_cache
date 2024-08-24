@@ -9,7 +9,7 @@ if ( ! file_exists( 'config.php' ) ) {
 require_once( 'config.php' );
 
 ini_set( 'display_errors', 'off' );
-set_time_limit( 30 ); // set a rather restrictive time limit...
+set_time_limit( 5 ); // set a rather restrictive time limit...
 
 if ( strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false || strpos( TILECACHE_USER_AGENT, 'example.invalid' ) !== false ) {
 	die( 'No user agent or referer specified! This is needed to successfully run your tile cache!' );
@@ -80,8 +80,8 @@ function getTile( array $layers, string $layer, Loc $loc ) : string|false {
 	\curl_setopt( $ch, \CURLOPT_FORBID_REUSE, true );
 	\curl_setopt( $ch, \CURLOPT_FRESH_CONNECT, true );
 	\curl_setopt( $ch, \CURLOPT_SSL_VERIFYPEER, true );
-	\curl_setopt( $ch, \CURLOPT_TIMEOUT, 4 );
-	\curl_setopt( $ch, \CURLOPT_CONNECTTIMEOUT, 4 );
+	\curl_setopt( $ch, \CURLOPT_TIMEOUT, 2 );
+	\curl_setopt( $ch, \CURLOPT_CONNECTTIMEOUT, 2 );
 	$binary = \curl_exec( $ch );
 
 	$errno = \curl_errno( $ch );
@@ -92,15 +92,6 @@ function getTile( array $layers, string $layer, Loc $loc ) : string|false {
 		return false;
 	}
 	return $binary;
-}
-
-// Try to download the tile two times.
-function getTileWithRetries( array $layers, string $layer, Loc $loc ) : string|false {
-	if ( $binary = getTile( $layers, $layer, $loc ) ) {
-		return $binary;
-	}
-
-	return false;
 }
 
 // Cache a tile on disk.
@@ -132,7 +123,7 @@ function cacheTile( string $binary, string $layer, Loc $loc ) : bool {
 }
 
 // Get the tile
-$binary = getTileWithRetries( TILECACHE_LAYERS, $layer, $loc );
+$binary = getTile( TILECACHE_LAYERS, $layer, $loc );
 
 // If no tile was retrieved, serve the null tile and end at this point
 if ( ! $binary ) {
