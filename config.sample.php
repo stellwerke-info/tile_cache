@@ -19,6 +19,11 @@ const TILECACHE_LAYERS = [
 	'orm'   => [ 'https://{s}.tiles.openrailwaymap.org/standard', 17 ],
 ];
 
+// Store all layer folders in this subdirectory:
+// - plain directory name (must be relative to the current directory, without delimiting slashes)
+// - or an empty string, for this directory
+const TILECACHE_REPOSITORY = '';
+
 // Some config options for the public index site.
 const INDEX_DESCRIPTION = 'A short public description';
 

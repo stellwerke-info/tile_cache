@@ -96,9 +96,19 @@ function getTile( array $layers, string $layer, Loc $loc ) : string|false {
 
 // Cache a tile on disk.
 function cacheTile( string $binary, string $layer, Loc $loc ) : bool {
-	// Ensure the cache is writable
 	$cache = __DIR__ . '/';
-	if ( ! is_writable( $cache ) ) {
+
+	$repo_safe = TILECACHE_REPOSITORY ?? '';
+	if ( ! \is_string( $repo_safe ) || ! \preg_match( '/^[a-z_]+$/', $repo_safe ) ) {
+	    error_log( "Cannot write to cache $repo_safe" );
+	    return false;
+	}
+	if ( $repo_safe != '' ) {
+	    $cache .= $repo_safe . '/';
+	}
+
+	// Ensure the cache is writable
+	if ( ! is_dir( $cache ) || ! is_writable( $cache ) ) {
 		error_log( "Cannot write to cache $cache" );
 		return false;
 	}

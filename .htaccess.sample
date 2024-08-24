@@ -16,9 +16,13 @@ RewriteCond %{HTTP_SEC_FETCH_MODE} !^(|no-cors)$ [NC]
 RewriteCond %{HTTP_SEC_FETCH_DEST} !^(|image)$ [NC]
 RewriteRule .*\.png$ - [F]
 
+# disallow access to no_backup store (or any other storage directory for all tiles)
+RewriteCond %{REQUEST_URI} ^/no_backup/
+RewriteRule .* - [F,L]
+
 # Download non-cached tiles
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} /([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
+RewriteCond %{REQUEST_URI} ^/([a-z]+)/([0-9]+)/([0-9]+)/([0-9]+)\.png$
 RewriteRule . /tile.php?layer=%1&x=%3&y=%4&z=%2 [L,QSA,E=TILE_DOWNLOAD:1]
 
 RewriteCond %{ENV:REDIRECT_TILE_DOWNLOAD} ^$
