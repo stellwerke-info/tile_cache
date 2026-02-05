@@ -46,7 +46,7 @@ function clean_tiles( int $expiryDays ) : void {
 	}
 
 	// Command to clear out the tiles from subfolders
-	$command = 'find .' . $repo_safe . ' -mindepth 2 -type f -name \'*.png\' -mtime +' . $expiryDays . ' -delete';
+	$command = 'find .' . $repo_safe . ' -mindepth 2 -type f -regex \'.*\\.\\(png\\|webp\\|avif\\)\' -mtime +' . $expiryDays . ' -delete';
 	echo 'Starting tile clearance: ' . $command . \PHP_EOL;
 	$lastLine = \exec($command);
 	echo 'Completed tile clearance: ' . $lastLine . \PHP_EOL;
@@ -55,7 +55,7 @@ function clean_tiles( int $expiryDays ) : void {
 		\defined( 'TILECACHE_CLEAN_DAYS_HIGH_RES' ) && is_int( TILECACHE_CLEAN_DAYS_HIGH_RES ) && TILECACHE_CLEAN_DAYS_HIGH_RES > 0
 		&& \is_int( $clean_maxz ) && $clean_maxz > 15
 	) {
-		$command = 'find .' . $repo_safe . '/{'. $layers_shellsafe . '}/{15..' . $clean_maxz . '} -type f -name \'*.png\' -mtime +' . ( (int) TILECACHE_CLEAN_DAYS_HIGH_RES ) . ' -delete';
+		$command = 'find .' . $repo_safe . '/{'. $layers_shellsafe . '}/{15..' . $clean_maxz . '} -type f -regex \'.*\\.\\(png\\|webp\\|avif\\)\' -mtime +' . ( (int) TILECACHE_CLEAN_DAYS_HIGH_RES ) . ' -delete';
 		echo 'Starting high-res tile clearance: ' . $command . \PHP_EOL;
 		$lastLine = \exec($command);
 		echo 'Completed high-res tile clearance: ' . $lastLine . \PHP_EOL;
