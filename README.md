@@ -21,7 +21,11 @@ Only the tile retrieval is handled by PHP, subsequent requests are served direct
     - Both methods can be enabled at the same time.
 3. Put an image file into `img/bg.pg` that will be shown in the background on the public landing page.
 3. Upload all files
-4. Add a cron job to `cron.php` (via with PHP-CLI. HTTP Crons will not work well because the runtime might get rather long)
+4. Add a cron job to `cron.php` (via with PHP-CLI. HTTP Crons will not work because the runtime might get rather long)
 
 ## Administration
 Cleanup happens automatically via cron.
+
+## Image conversion cron job
+
+Additionally, this package provides a cronjob in the `bin/` directory that compresses the download png tiles into webp/avif images. Depending of the content of the tiles, either format mighht achieve better compression factors.
