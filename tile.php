@@ -148,7 +148,7 @@ if ( ! cacheTile( $binary, $layer, $loc ) ) {
 }
 
 // Send cache headers; see https://developers.google.com/speed/docs/best-practices/caching
-header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', strtotime( '+' . TILECACHE_BROWSER_CACHE_DAYS . ' days' ) ) . ' GMT' );
+header( 'Cache-Control: public, max-age=' . ( (int) TILECACHE_BROWSER_CACHE_DAYS * 86400 ) );
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) );
 
 // Serve the file
